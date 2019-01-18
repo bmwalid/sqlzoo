@@ -1,0 +1,9 @@
+SELECT CONCAT('ALTER TABLE ', TABLE_NAME, ' CHANGE `', COLUMN_NAME, '` `',
+UPPER(COLUMN_NAME), '` ', COLUMN_TYPE, ';')
+FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'decat'
+INTO OUTFILE 
+'/var/lib/mysql-files/rename_columns.sql';
+
+select concat('rename table ', table_name, ' to ' , upper(table_name) , ';') 
+from information_schema.tables where table_schema = 'decat' into outfile 
+'/var/lib/mysql-files/rename_tables.sql';
